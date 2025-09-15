@@ -25,7 +25,7 @@ export default function LoginPage() {
           <p className="mt-4 text-blue-500 text-lg font-bold">Welcome</p>
         </div>
       ) : (
-        <Project onLogin={handleLogin} /> 
+        <Project/> 
       )}
     </div>
   );

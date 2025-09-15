@@ -5,7 +5,7 @@ const ArrowUp = () => {
     <div>
       <svg
         viewBox="0 0 24 24"
-        className="w-8 h-6"
+        className=" h-6"
         role="img"
         aria-label="Arrow Up"
       >

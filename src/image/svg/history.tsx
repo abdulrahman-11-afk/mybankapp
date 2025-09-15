@@ -9,7 +9,6 @@ const Histry = () => {
         role="img" 
         aria-label="History"
       >
-        <title>History — clock</title>
         <circle 
           cx="12" 
           cy="12" 
