@@ -1,5 +1,5 @@
 "use client";
-import Transf from "../../../component/transfer";
+import Transfer from "../../../component/transfer";
 export default function TransferPage() {
-  return <Transf />;
+  return <Transfer/>;
 }

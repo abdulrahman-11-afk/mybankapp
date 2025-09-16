@@ -18,6 +18,7 @@ import ArrowDown from "@/image/svg/arrowdown";
 import router from "next/router";
 import Link from "next/link";
 
+
 export default function BalanceCard() {
     const [showBalance, setShowBalance] = useState(true);
     const [username, setUsername] = useState("");
@@ -79,7 +80,7 @@ export default function BalanceCard() {
                             <p className='text-2xl font-bold text-blue-500'>Quick Actions</p>
                         </div>
                         <div className='flex items-center justify-evenly   flex-wrap '>
-                          <Link href="/Transfer">  <div className='w-80  h-30 flex flex-col items-center justify-center rounded-lg shadow-sm hover:scale-105 text-blue-500 bg-white transition-transform cursor-pointer'>
+                            <Link href="/beforetransfer">  <div className='w-80  h-30 flex flex-col items-center justify-center rounded-lg shadow-sm hover:scale-105 text-blue-500 bg-white transition-transform cursor-pointer'>
                                 <div className="hidden sm:block">
                                     <Transfer />
                                 </div>
@@ -192,10 +193,10 @@ export default function BalanceCard() {
                         <Home />
                         <p className='cursor-pointer font-bold text-lg text-blue-500'>Home</p>
                     </div>
-                    <div className="flex flex-col items-center justify-center">
+                    <Link href="/beforetransfer"><div className="flex flex-col items-center  justify-center">
                         <Transfer1 />
-                        <p className='cursor-pointer font-bold text-lg text-blue-500'>Transfer</p>
-                    </div>
+                        <p className='cursor-pointer  font-bold text-lg text-blue-500'>Transfer</p>
+                    </div></Link>
                     <div className="flex flex-col items-center justify-center">
                         <Histry />
                         <p className='cursor-pointer font-bold text-lg text-blue-500'>History</p>

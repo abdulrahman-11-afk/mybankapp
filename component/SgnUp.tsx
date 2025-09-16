@@ -95,7 +95,6 @@ const SgnUp = () => {
               <p
                 onClick={async () => {
                   await navigator.clipboard.writeText(accountNumber);
-                  alert("Copied to clipboard ✅");
                 }}
                 className="text-blue-700 text-lg font-mono cursor-pointer hover:underline"
               >
