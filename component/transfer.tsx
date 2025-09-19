@@ -12,12 +12,12 @@ const Transf = () => {
     return (
         <div className=' m-0 p-0 '>
             <header className='bg-wh'>
-                <div className='flex items-center justify-between md:px-15 h-20 bg-white shadow-md fixed left-0 top-0 right-0'>
+                               <div className='flex items-center justify-between md:px-15 px-5 h-20 bg-white shadow-md fixed left-0 top-0 right-0'>
                     <div className='flex items-center justify-center gap-x-4'>
                         <Wavy />
-                        <p className='text-[#2164A1] font-extrbold text-3xl'>PayWave</p>
+                        <p className='text-[#2164A1] text-xl font-extrbold md:text-3xl'>PayWave</p>
                     </div>
-                    <div className="flex items-center gap-x-3">
+                    <div className="flex items-center mdgap-x-3">
                         <div>
                             <Notify />
                         </div>
@@ -27,7 +27,7 @@ const Transf = () => {
                     </div>
                 </div>
             </header>
-            <main className='bg-gray-100' >
+            <main className='bg-gray-100 h-[100vh]' >
                 <section className='pt-30'>
                     <div className='md:mx-17 flex items-center justify-between'>
                         <p className='text-blue-500 text-xl'>Transfer to Bank </p>
@@ -61,36 +61,35 @@ const Transf = () => {
                             </div>
                         </div>
                        <div className='items-center justify-center flex'>
-                          <button className='w-27 text-white rounded-sm bg-blue-500 h-10'>Next</button>
+                         <Link href={"/Transferpass"}> <button className='w-27 text-white rounded-sm bg-blue-500 h-10'>Next</button></Link>
                        </div>
 
                     </form>
                 </section>
             </main>
-            <div className='bg-gray-100 h-20'>
-                
-            </div>
+            
             <footer className=''>
-                <div className='flex items-center justify-evenly bg-white h-20  fixed bottom-0 left-0  right-0'>
-                   <Link href="/dashboard"> <div className="flex flex-col items-center justify-center">
+               <div className='flex items-center justify-evenly mdpx-8 h-20 bg-white shadow-xl z-40  fixed bottom-0 left-0  right-0'>
+                   <Link href="/dashboard">
+                    <div className="flex flex-col items-center justify-center">
                         <Home />
-                        <p className='cursor-pointer font-bold text-lg text-blue-500'>Home</p>
+                        <p className='cursor-pointer fmd:ont-bold md:text-lg text-blue-500'>Home</p>
+                    </div></Link>
+                    <Link href="/beforetransfer"><div className="flex flex-col items-center  justify-center">
+                        <Transfer1 />
+                        <p className='cursor-pointer  md:font-bold md:text-lg text-blue-500'>Transfer</p>
                     </div></Link>
                     <div className="flex flex-col items-center justify-center">
-                        <Transfer1 />
-                        <p className='cursor-pointer font-bold text-lg text-blue-500'>Transfer</p>
-                    </div>
-                    <div className="flex flex-col items-center justify-center">
                         <Histry />
-                        <p className='cursor-pointer font-bold text-lg text-blue-500'>History</p>
+                        <p className='cursor-pointer md:font-bold md:text-lg text-blue-500'>History</p>
                     </div>
                     <div className="flex flex-col items-center justify-center">
                         <Rewards />
-                        <p className='cursor-pointer font-bold text-lg text-blue-500'>Rewards</p>
+                        <p className='cursor-pointer md:font-bold md:text-lg text-blue-500'>Rewards</p>
                     </div>
                     <div className="flex flex-col items-center justify-center">
                         <Profile />
-                        <p className='cursor-pointer font-bold text-lg text-blue-500'>Profile</p>
+                        <p className='cursor-pointer md:font-bold md:text-lg text-blue-500'>Profile</p>
                     </div>
                 </div>
             </footer>

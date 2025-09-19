@@ -2,7 +2,7 @@
 import Wavy from '@/image/svg/Wavy';
 import React, { useState } from 'react';
 import Link from "next/link";
-import { useRouter } from "next/navigation"; 
+import { useRouter } from "next/navigation";
 
 const SgnUp = () => {
   const router = useRouter();
@@ -13,6 +13,9 @@ const SgnUp = () => {
     e.preventDefault();
     const form = e.currentTarget;
 
+    const firstName = (form.firstName as HTMLInputElement).value;
+    const surname = (form.surname as HTMLInputElement).value;
+    const email = (form.email as HTMLInputElement).value;
     const password = (form.password as HTMLInputElement).value;
     const confirmPassword = (form.confirmPassword as HTMLInputElement).value;
     const username = (form.username as HTMLInputElement).value;
@@ -25,20 +28,37 @@ const SgnUp = () => {
 
     const acc = phone.startsWith("0") ? phone.slice(1) : phone;
 
-    
+    const newUser = {
+      firstName,
+      surname,
+      username,
+      email,
+      number: acc,
+      password,
+    };
+    let users = JSON.parse(localStorage.getItem("users") || "[]");
+
+    if (users.some((u: any) => u.email === email)) {
+      setError("Email already registered");
+      return;
+    }
+    users.push(newUser);
+    localStorage.setItem("users", JSON.stringify(users));
+
+
     localStorage.setItem("username", username);
     localStorage.setItem("accountNumber", acc);
 
     setError("");
-    setAccountNumber(acc); 
+    setAccountNumber(acc);
   };
 
   return (
     <div className="min-h-screen h-[100vh] bg-gray-200">
-      <div className="flex items-center justify-around h-25 sm:gap-x-250">
+      <div className="flex items-center justify-between mx-7 h-25">
         <div className="flex items-center justify-center gap-x-4">
           <Wavy />
-          <p className="text-[#2164A1] font-extrabold text-4xl">PayWave</p>
+          <p className="text-[#2164A1] text-2xl font-bold md:font-extrabold md:text-4xl">PayWave</p>
         </div>
         <Link href="/login">
           <button className="w-30 bg-blue-700 text-white h-10 rounded-md border-none cursor-pointer">
@@ -47,17 +67,17 @@ const SgnUp = () => {
         </Link>
       </div>
 
-      <div className="flex justify-center items-center h-[80vh]">
+      <div className="flex justify-center items-center h-[100vh] bg-gray-200">
         <div className="bg-white shadow-lg rounded-xl p-8 w-96 sm:m-10">
           <h2 className="text-2xl font-bold text-blue-900 mb-6">Sign up</h2>
-          <form className="space-y-4" onSubmit={handleSubmit}>
-            <input type="text" name="firstName" placeholder="First name" required className="w-full border rounded-md px-4 py-2 focus:outline-none" />
-            <input type="text" name="surname" placeholder="Surname" required className="w-full border rounded-md px-4 py-2 focus:outline-none" />
-            <input type="text" name="username" placeholder="Username" required className="w-full border rounded-md px-4 py-2 focus:outline-none" />
-            <input type="email" name="email" placeholder="Email" required className="w-full border rounded-md px-4 py-2 focus:outline-none" />
-            <input type="number" name="number" placeholder="Phone Number" required className="w-full border rounded-md px-4 py-2 focus:outline-none" />
-            <input type="password" name="password" placeholder="Password" required minLength={6} className="w-full border rounded-md px-4 py-2 focus:outline-none" />
-            <input type="password" name="confirmPassword" placeholder="Confirm Password" required minLength={6} className="w-full border rounded-md px-4 py-2 focus:outline-none" />
+          <form className="md:space-y-4 space-y-3 mt-7" onSubmit={handleSubmit}>
+            <input type="text" name="firstName" placeholder="First name" required className="w-full border border-gray-500 rounded-md px-4 py-2 focus:outline-none placeholder:text-gray-500 text-gray-500" />
+            <input type="text" name="surname" placeholder="Surname" required className="w-full border-gray-500 border rounded-md px-4 py-2 focus:outline-none placeholder:text-gray-500 text-gray-500" />
+            <input type="text" name="username" placeholder="Username" required className="w-full border-gray-500 border rounded-md px-4 py-2 focus:outline-none placeholder:text-gray-500 text-gray-500" />
+            <input type="email" name="email" placeholder="Email" required className="w-full border border-gray-500 rounded-md px-4 py-2 focus:outline-none placeholder:text-gray-500 text-gray-500" />
+            <input type="number" name="number" placeholder="Phone Number" required className="w-full border border-gray-500 rounded-md px-4 py-2 focus:outline-none placeholder:text-gray-500 text-gray-500" />
+            <input type="password" name="password" placeholder="Password" required minLength={6} className="w-full border border-gray-500 rounded-md px-4 py-2 focus:outline-none placeholder:text-gray-500 text-gray-500" />
+            <input type="password" name="confirmPassword" placeholder="Confirm Password" required minLength={6} className="w-full border border-gray-500 rounded-md px-4 py-2 focus:outline-none placeholder:text-gray-500 text-gray-500" />
 
             {error && <p className="text-red-500 text-sm">{error}</p>}
 
