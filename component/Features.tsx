@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Histry from '@/image/svg/history'
 import Home from '@/image/svg/home'
 import Notify from '@/image/svg/notify'
@@ -9,9 +12,16 @@ import Link from 'next/link'
 import React from 'react'
 
 const Features = () => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 3000); // 3 sec
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="bg-white dark:bg-gray-900 dark:text-white min-h-screen">
-        <header>
+      <header>
         <div className="flex items-center justify-between md:px-15 px-5 h-20 bg-white dark:bg-gray-900 shadow-md fixed left-0 top-0 right-0">
           <div className="flex items-center justify-center gap-x-4">
             <Wavy />
@@ -29,7 +39,21 @@ const Features = () => {
           </div>
         </div>
       </header>
-       <footer>
+
+    <main className="flex items-center justify-center h-[100vh] p-5 md:pt-28">
+  {loading ? (
+    <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+  ) : (
+    <div >
+      <p className="md:text-2xl text-xl  md:font-bold text-blue-500">
+      Features coming soon...
+    </p>
+    </div>
+  )}
+</main>
+
+
+      <footer>
         <div className="flex items-center justify-evenly mdpx-8 h-20 bg-white dark:bg-gray-900 shadow-xl z-40 fixed bottom-0 left-0 right-0">
           <Link href="/dashboard">
             <div className="flex flex-col items-center justify-center">
@@ -47,28 +71,34 @@ const Features = () => {
               </p>
             </div>
           </Link>
-          <div className="flex flex-col items-center justify-center">
-            <Histry />
-            <p className="cursor-pointer md:font-bold md:text-lg text-blue-500">
-              History
-            </p>
-          </div>
-          <div className="flex flex-col items-center justify-center">
-            <Rewards />
-            <p className="cursor-pointer md:font-bold md:text-lg text-blue-500">
-              Rewards
-            </p>
-          </div>
-          <div className="flex flex-col items-center justify-center">
-            <Profile />
-            <p className="cursor-pointer md:font-bold md:text-lg text-blue-500">
-              Profile
-            </p>
-          </div>
+          <Link href="/Features">
+            <div className="flex flex-col items-center justify-center">
+              <Histry />
+              <p className="cursor-pointer md:font-bold md:text-lg text-blue-500">
+                History
+              </p>
+            </div>
+          </Link>
+          <Link href="/Features">
+            <div className="flex flex-col items-center justify-center">
+              <Rewards />
+              <p className="cursor-pointer md:font-bold md:text-lg text-blue-500">
+                Rewards
+              </p>
+            </div>
+          </Link>
+          <Link href="/Features">
+            <div className="flex flex-col items-center justify-center">
+              <Profile />
+              <p className="cursor-pointer md:font-bold md:text-lg text-blue-500">
+                Profile
+              </p>
+            </div>
+          </Link>
         </div>
       </footer>
     </div>
   )
 }
 
-export default Features
+export default Features;

@@ -1,104 +1,202 @@
 "use client";
-import Histry from '@/image/svg/history'
-import Home from '@/image/svg/home'
-import Notify from '@/image/svg/notify'
-import Profile from '@/image/svg/profile'
-import Rewards from '@/image/svg/rewards'
-import Transfer1 from '@/image/svg/tranfer1'
-import Wavy from '@/image/svg/Wavy'
-import Link from 'next/link'
-import React from 'react'
-import { useState } from "react";
+import Histry from "@/image/svg/history";
+import Home from "@/image/svg/home";
+import Notify from "@/image/svg/notify";
+import Profile from "@/image/svg/profile";
+import Rewards from "@/image/svg/rewards";
+import Transfer1 from "@/image/svg/tranfer1";
+import Wavy from "@/image/svg/Wavy";
+import Link from "next/link";
+import React, { useState } from "react";
 
 const Transferwave = () => {
+    const [account, setAccount] = useState("");
+    const [amount, setAmount] = useState<number>(0);
+    const [pin, setPin] = useState("");
+    const [remark, setRemark] = useState("");
+    const [balance, setBalance] = useState<number>(5000);
+    const [popupMessage, setPopupMessage] = useState<string | null>(null);
+    const [popupSuccess, setPopupSuccess] = useState<boolean>(false);
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        if (amount <= 0) {
+            setPopupMessage("Enter a valid amount.");
+            setPopupSuccess(false);
+            return;
+        }
+
+        if (amount > balance) {
+            setPopupMessage("Transaction failed: Insufficient balance.");
+            setPopupSuccess(false);
+        } else {
+            setBalance(balance - amount);
+            setPopupMessage(`Transfer successful! ₦${amount} sent to ${account}.`);
+            setPopupSuccess(true);
+            setAccount("");
+            setAmount(0);
+            setPin("");
+            setRemark("");
+        }
+    };
+
     return (
         <div>
             <header>
-                <div className='flex items-center justify-between md:px-15 px-5 h-20 bg-white shadow-md fixed left-0 top-0 right-0'>
-                    <div className='flex items-center justify-center gap-x-4'>
+                <div className="flex items-center justify-between md:px-15 px-5 h-20 bg-white shadow-md fixed left-0 top-0 right-0">
+                    <div className="flex items-center justify-center gap-x-4">
                         <Wavy />
-                        <p className='text-[#2164A1] text-xl font-extrbold md:text-3xl'>PayWave</p>
+                        <p className="text-[#2164A1] text-xl font-extrabold md:text-3xl">
+                            PayWave
+                        </p>
                     </div>
                     <div className="flex items-center mdgap-x-3">
                         <div>
                             <Notify />
                         </div>
-                        <div className='w-[45px] h-[45px] rounded-full  flex items-center justify-center'>
+                        <div className="w-[45px] h-[45px] rounded-full  flex items-center justify-center">
                             <Profile />
                         </div>
                     </div>
                 </div>
             </header>
-            <main className='bg-gray-100'>
-                <section className='pt-30'>
-                    <div className='md:mx-17 flex items-center justify-between'>
-                        <p className='text-blue-500 text-xl'>Transfer to PayWave</p>
-                        <p className='text-blue-500 text-xl'>History</p>
-                    </div>
+
+            <main className="bg-gray-100 min-h-screen pt-28">
+
+                <section className="md:mx-17 flex items-center justify-between px-6">
+                    <Link href="/Transfe">
+                        <p className="text-blue-500 text-xl cursor-pointer">Transfer to Bank</p>
+                    </Link>
+                    <p className="text-blue-500 text-xl cursor-pointer">History</p>
                 </section>
-                <section className='mt-10 flex items-center justify-center bg-gray-100 '>
-                    <form className='flex flex-col  justify-center gap-y-5 w-250 h-100 shadow-md bg-white rounded-lg text-blue-700'>
-                        <div className='flex flex-col mx-20 '>
-                            <input className='overflow-hidden h-10  focus:outline-none' required type='number' placeholder='Enter 10 digits Account Number' />
-                            <div className='items-center flex justify-center'>
-                                <hr className='text-gray-400 w-[100%]' />
-                            </div>
-                        </div>
-                        <div className='flex flex-col mx-20 '>
-                            <input className='h-10  focus:outline-none' type='number' required placeholder='Enter Amount (₦) ' />
-                            <div className='items-center flex justify-center'>
-                                <hr className='text-gray-400 w-[100%]' />
-                            </div>
-                        </div>
-                         <div className='flex flex-col mx-20 '>
-                            <input type='text'  maxLength={4} pattern="[0-9]*" inputMode="numeric" className='h-10  focus:outline-none' placeholder='Enter your 4 digit pin' />
-                            <div className='items-center flex justify-center'>
-                                <hr className='text-gray-400 w-[100%]' />
-                            </div>
-                        </div>
-                        <div className='flex flex-col mx-20 '>
-                            <input className='h-10  focus:outline-none' type='text' placeholder='Remark (optional)' />
-                            <div className='items-center flex justify-center'>
-                                <hr className='text-gray-400 w-[100%]' />
-                            </div>
-                        </div>
-                        <div className='items-center justify-center flex'>
-                            <Link href={"/Transferpass"}className='w-27 text-white flex items-center justify-center rounded-sm bg-blue-500 h-10'>Transfer</Link>
+
+
+
+                <section className="mt-10 flex items-center justify-center bg-gray-100 ">
+                    <form
+                        onSubmit={handleSubmit}
+                        className="flex flex-col justify-center gap-y-5 w-96 shadow-md bg-white rounded-lg text-blue-700 p-6"
+                    >
+                        <div className="flex flex-col">
+                            <input
+                                className="h-10 focus:outline-none"
+                                required
+                                type="number"
+                                placeholder="Enter 10 digits Account Number"
+                                value={account}
+                                onChange={(e) => setAccount(e.target.value)}
+                            />
+                            <hr className="text-gray-400 w-full" />
                         </div>
 
+                        <div className="flex flex-col">
+                            <input
+                                className="h-10 focus:outline-none"
+                                type="number"
+                                required
+                                placeholder="Enter Amount (₦)"
+                                value={amount}
+                                onChange={(e) => setAmount(Number(e.target.value))}
+                            />
+                            <hr className="text-gray-400 w-full" />
+                        </div>
+
+                        <div className="flex flex-col">
+                            <input
+                                type="password"
+                                maxLength={4}
+                                pattern="[0-9]*"
+                                inputMode="numeric"
+                                className="h-10 focus:outline-none"
+                                placeholder="Enter your 4 digit pin"
+                                value={pin}
+                                onChange={(e) => setPin(e.target.value)}
+                            />
+                            <hr className="text-gray-400 w-full" />
+                        </div>
+
+                        <div className="flex flex-col">
+                            <input
+                                className="h-10 focus:outline-none"
+                                type="text"
+                                placeholder="Remark (optional)"
+                                value={remark}
+                                onChange={(e) => setRemark(e.target.value)}
+                            />
+                            <hr className="text-gray-400 w-full" />
+                        </div>
+
+                        <div className="items-center justify-center flex">
+                            <button
+                                type="submit"
+                                className="w-32 text-white flex items-center justify-center rounded-sm bg-blue-500 h-10"
+                            >
+                                Transfer
+                            </button>
+                        </div>
                     </form>
                 </section>
-                <div className='bg-gray-100 h-30'>
 
-                </div>
+
+                {popupMessage && (
+                    <div className="fixed bottom-24 left-1/2 transform -translate-x-1/2 bg-white shadow-lg rounded-lg p-4 w-80 text-center">
+                        <p
+                            className={`text-lg font-bold ${popupSuccess ? "text-green-600" : "text-red-600"
+                                }`}
+                        >
+                            {popupMessage}
+                        </p>
+                    </div>
+                )}
             </main>
+
             <footer>
-                <div className='flex items-center justify-evenly md:px-8 h-20 bg-white shadow-xl z-40  fixed bottom-0 left-0  right-0'>
+                <div className="flex items-center justify-evenly h-20 bg-white dark:bg-gray-900 shadow-xl z-40 fixed bottom-0 left-0 right-0">
                     <Link href="/dashboard">
                         <div className="flex flex-col items-center justify-center">
                             <Home />
-                            <p className='cursor-pointer fmd:ont-bold md:text-lg text-blue-500'>Home</p>
-                        </div></Link>
-                    <Link href="/beforetransfer"><div className="flex flex-col items-center  justify-center">
-                        <Transfer1 />
-                        <p className='cursor-pointer  md:font-bold md:text-lg text-blue-500'>Transfer</p>
-                    </div></Link>
-                    <div className="flex flex-col items-center justify-center">
-                        <Histry />
-                        <p className='cursor-pointer md:font-bold md:text-lg text-blue-500'>History</p>
-                    </div>
-                    <div className="flex flex-col items-center justify-center">
-                        <Rewards />
-                        <p className='cursor-pointer md:font-bold md:text-lg text-blue-500'>Rewards</p>
-                    </div>
-                    <div className="flex flex-col items-center justify-center">
-                        <Profile />
-                        <p className='cursor-pointer md:font-bold md:text-lg text-blue-500'>Profile</p>
-                    </div>
+                            <p className="cursor-pointer md:font-bold md:text-lg text-blue-500">
+                                Home
+                            </p>
+                        </div>
+                    </Link>
+                    <Link href="/beforetransfer">
+                        <div className="flex flex-col items-center justify-center">
+                            <Transfer1 />
+                            <p className="cursor-pointer md:font-bold md:text-lg text-blue-500">
+                                Transfer
+                            </p>
+                        </div>
+                    </Link>
+                    <Link href={"/Features"}>
+                        <div className="flex flex-col items-center justify-center">
+                            <Histry />
+                            <p className="cursor-pointer md:font-bold md:text-lg text-blue-500">
+                                History
+                            </p>
+                        </div>
+                    </Link>
+                    <Link href={"/Features"}>
+                        <div className="flex flex-col items-center justify-center">
+                            <Rewards />
+                            <p className="cursor-pointer md:font-bold md:text-lg text-blue-500">
+                                Rewards
+                            </p>
+                        </div>
+                    </Link>
+                    <Link href={"/Features"}>
+                        <div className="flex flex-col items-center justify-center">
+                            <Profile />
+                            <p className="cursor-pointer md:font-bold md:text-lg text-blue-500">
+                                Profile
+                            </p>
+                        </div>
+                    </Link>
                 </div>
             </footer>
         </div>
-    )
-}
+    );
+};
 
-export default Transferwave
+export default Transferwave;

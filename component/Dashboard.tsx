@@ -35,6 +35,17 @@ export default function BalanceCard() {
   const [accountNumber, setAccountNumber] = useState("");
   const [error, setError] = useState("");
 
+  const [balance, setBalance] = useState(0);
+
+  useEffect(() => {
+    const savedBalance = localStorage.getItem("balance");
+    if (savedBalance) {
+      setBalance(parseFloat(savedBalance));
+    } else {
+      localStorage.setItem("balance", "5000000");
+      setBalance(5000000);
+    }
+  }, []);
 
 
   useEffect(() => {
@@ -67,15 +78,15 @@ export default function BalanceCard() {
 
       <main>
         <section className="pt-24 md:mx-8">
-          <div className="m-8">
+          <div className="m-4">
             <p className="text-2xl font-bold text-blue-500">
               Hello, {username}
             </p>
           </div>
 
 
-          <div className="bg-blue-500 text-white mx-8 h-40 rounded-2xl">
-            <div className="flex items-center justify-between p-5">
+          <div className="bg-blue-500 text-white mx-4 h-30 md:h-40 rounded-2xl">
+            <div className="flex items-center justify-between p-3">
               <p className="text-xl">Available Balance</p>
               <button
                 onClick={() => setShowBalance(!showBalance)}
@@ -84,22 +95,23 @@ export default function BalanceCard() {
                 {showBalance ? <Eyes /> : <Eyesclose />}
               </button>
             </div>
-          <div className="flex items-center justify-between p-5">
-              <p className="text-4xl font-bold ">
-              {showBalance ? "₦0.00" : "****"}
-            </p>
-            <p className="text-2xl font-bold"> {accountNumber
-              ? accountNumber.slice(0, -3).replace(/./g, "*") + accountNumber.slice(-3)
-              : ""}</p>
-          </div>
+            <div className="flex items-center justify-between p-3">
+              <p className="md:text-4xl text-2xl font-bold ">
+                {showBalance ? `₦${balance.toLocaleString()}.00` : "****"}
+              </p>
+
+              <p className="md:text-2xl text-2xl font-bold"> {accountNumber
+                ? accountNumber.slice(0, -3).replace(/./g, "*") + accountNumber.slice(-3)
+                : ""}</p>
+            </div>
           </div>
         </section>
 
         <section className="md:mx-8">
-          <div className="m-8">
+          <div className="m-4">
             <p className="text-2xl font-bold text-blue-500">Quick Actions</p>
           </div>
-          <div className="flex items-center ml-6 md:ml-0 justify-evenly">
+          <div className="flex items-center ml-2 md:ml-0 justify-evenly">
             <Link href="/beforetransfer">
               <div className="md:w-80 h-12 w-19 md:h-30 flex flex-col items-center justify-center rounded-sm md:rounded-lg shadow-sm hover:scale-105 dark:bg-gray-900 dark:border-blue-500 dark:border-2 text-blue-500 bg-white transition-transform cursor-pointer">
                 <div className="hidden sm:block">
@@ -109,31 +121,37 @@ export default function BalanceCard() {
               </div>
             </Link>
 
-            <div className="md:w-80 h-12 w-19 md:h-30 flex flex-col items-center justify-center rounded-sm md:rounded-lg shadow-sm hover:scale-105 text-blue-500 dark:bg-gray-900 dark:border-blue-500 dark:border-2 bg-white transition-transform cursor-pointer">
-              <div className="hidden sm:block">
-                <Airtime />
+            <Link href={"/Features"}>
+              <div className="md:w-80 h-12 w-19 md:h-30 flex flex-col items-center justify-center rounded-sm md:rounded-lg shadow-sm hover:scale-105 text-blue-500 dark:bg-gray-900 dark:border-blue-500 dark:border-2 bg-white transition-transform cursor-pointer">
+                <div className="hidden sm:block">
+                  <Airtime />
+                </div>
+                <p className="md:text-xl md:font-bold">Airtime</p>
               </div>
-              <p className="md:text-xl md:font-bold">Airtime</p>
-            </div>
+            </Link>
 
-            <div className="md:w-80 h-12 w-19 md:h-30 flex flex-col items-center justify-center rounded-sm md:rounded-lg shadow-sm hover:scale-105 dark:bg-gray-900 dark:border-blue-500 dark:border-2 text-blue-500 bg-white transition-transform cursor-pointer">
-              <div className="hidden sm:block">
-                <Data />
+            <Link href={"/Features"}>
+              <div className="md:w-80 h-12 w-19 md:h-30 flex flex-col items-center justify-center rounded-sm md:rounded-lg shadow-sm hover:scale-105 dark:bg-gray-900 dark:border-blue-500 dark:border-2 text-blue-500 bg-white transition-transform cursor-pointer">
+                <div className="hidden sm:block">
+                  <Data />
+                </div>
+                <p className="md:text-xl md:font-bold">Data</p>
               </div>
-              <p className="md:text-xl md:font-bold">Data</p>
-            </div>
+            </Link>
 
-            <div className="md:w-80 h-12 w-19 md:h-30 flex flex-col gap-y-2 items-center justify-center rounded-sm md:rounded-lg shadow-sm hover:scale-105 dark:bg-gray-900 dark:border-blue-500 dark:border-2 text-blue-500 bg-white transition-transform cursor-pointer">
-              <div className="hidden sm:block">
-                <Dots />
+            <Link href={"/Features"}>
+              <div className="md:w-80 h-12 w-19 md:h-30 flex flex-col gap-y-2 items-center justify-center rounded-sm md:rounded-lg shadow-sm hover:scale-105 dark:bg-gray-900 dark:border-blue-500 dark:border-2 text-blue-500 bg-white transition-transform cursor-pointer">
+                <div className="hidden sm:block">
+                  <Dots />
+                </div>
+                <p className="md:text-xl md:font-bold">Others</p>
               </div>
-              <p className="md:text-xl md:font-bold">Others</p>
-            </div>
+            </Link>
           </div>
         </section>
 
         <section className="pb-28 md:mx-10">
-          <div className="m-8">
+          <div className="m-4">
             <p className="text-2xl font-bold text-blue-500">
               Recent Transaction
             </p>
@@ -165,27 +183,33 @@ export default function BalanceCard() {
               </p>
             </div>
           </Link>
-          <div className="flex flex-col items-center justify-center">
-            <Histry />
-            <p className="cursor-pointer md:font-bold md:text-lg text-blue-500">
-              History
-            </p>
-          </div>
-          <div className="flex flex-col items-center justify-center">
-            <Rewards />
-            <p className="cursor-pointer md:font-bold md:text-lg text-blue-500">
-              Rewards
-            </p>
-          </div>
-          <div className="flex flex-col items-center justify-center">
-            <Profile />
-            <p className="cursor-pointer md:font-bold md:text-lg text-blue-500">
-              Profile
-            </p>
-          </div>
+          <Link href={"/Features"}>
+            <div className="flex flex-col items-center justify-center">
+              <Histry />
+              <p className="cursor-pointer md:font-bold md:text-lg text-blue-500">
+                History
+              </p>
+            </div>
+          </Link>
+          <Link href={"/Features"}>
+            <div className="flex flex-col items-center justify-center">
+              <Rewards />
+              <p className="cursor-pointer md:font-bold md:text-lg text-blue-500">
+                Rewards
+              </p>
+            </div>
+          </Link>
+          <Link href={"/Features"}>
+            <div className="flex flex-col items-center justify-center">
+              <Profile />
+              <p className="cursor-pointer md:font-bold md:text-lg text-blue-500">
+                Profile
+              </p>
+            </div>
+          </Link>
         </div>
       </footer>
-    </div>
+    </div >
   );
 }
 
