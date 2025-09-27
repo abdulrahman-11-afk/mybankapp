@@ -10,7 +10,6 @@ const Wavy = () => {
 </svg>
 
 </div>
-  )
-}
+  )}
 
 export default Wavy

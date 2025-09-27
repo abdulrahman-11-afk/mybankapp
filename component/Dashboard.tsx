@@ -37,15 +37,7 @@ export default function BalanceCard() {
 
   const [balance, setBalance] = useState(0);
 
-  useEffect(() => {
-    const savedBalance = localStorage.getItem("balance");
-    if (savedBalance) {
-      setBalance(parseFloat(savedBalance));
-    } else {
-      localStorage.setItem("balance", "5000000");
-      setBalance(5000000);
-    }
-  }, []);
+  
 
 
   useEffect(() => {
