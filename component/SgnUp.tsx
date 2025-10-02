@@ -58,17 +58,17 @@ const SgnUp = () => {
       <div className="flex items-center justify-between mx-7 h-25">
         <div className="flex items-center justify-center gap-x-4">
           <Wavy />
-          <p className="text-[#2164A1] text-2xl font-bold md:font-extrabold md:text-4xl">PayWave</p>
+          <p className="text-[#2164A1] text-xl md:text-2xl font-bold md:font-extrabold md:text-4xl">PayWave</p>
         </div>
         <Link href="/login">
-          <button className="w-30 bg-blue-700 text-white h-10 rounded-md border-none cursor-pointer">
+          <button className="md:w-30 w-20 bg-blue-700 text-white h-8 md:h-10 rounded-md border-none cursor-pointer">
             Login
           </button>
         </Link>
       </div>
 
-      <div className="flex justify-center items-center h-[100vh] bg-gray-200">
-        <div className="bg-white shadow-lg rounded-xl p-8 w-96 sm:m-10">
+      <div className="flex justify-center items-center bg-gray-200">
+        <div className="bg-white shadow-lg rounded-xl p-8 w-96 mx-6">
           <h2 className="text-2xl font-bold text-blue-900 mb-6">Sign up</h2>
           <form className="md:space-y-4 space-y-3 mt-7" onSubmit={handleSubmit}>
             <input type="text" name="firstName" placeholder="First name" required className="w-full border border-gray-500 rounded-md px-4 py-2 focus:outline-none placeholder:text-gray-500 text-gray-500" />

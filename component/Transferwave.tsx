@@ -76,7 +76,7 @@ const Transferwave = () => {
                 <section className="mt-10 flex items-center justify-center bg-gray-100 ">
                     <form
                         onSubmit={handleSubmit}
-                        className="flex flex-col justify-center gap-y-5 w-96 shadow-md bg-white rounded-lg text-blue-700 p-6"
+                        className="flex flex-col justify-center gap-y-5 md:w-96 shadow-md bg-white rounded-lg text-blue-700 p-6"
                     >
                         <div className="flex flex-col">
                             <input

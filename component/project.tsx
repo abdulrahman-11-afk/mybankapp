@@ -54,7 +54,7 @@ const Login = () => {
       <div className="flex items-center justify-between mx-5 h-25 ">
         <div className="flex items-center justify-center gap-x-4">
           <Wavy />
-          <p className="text-[#2164A1] font-extrabold text-4xl cursor-pointer">
+          <p className="text-[#2164A1] text-xl md:text-2xl font-bold md:font-extrabold md:text-4xl">
             PayWave
           </p>
         </div>
@@ -64,8 +64,8 @@ const Login = () => {
           </button>
         </Link>
       </div>
-      <div className="flex justify-center items-center h-[80vh]">
-        <div className="bg-white shadow-lg rounded-xl p-8 w-96 sm:m-10">
+      <div className="flex justify-center items-center ">
+        <div className="bg-white shadow-lg rounded-xl p-8 md:w-96 ">
           <h2 className="text-2xl font-bold text-blue-950 mb-6">Login</h2>
           <form className="space-y-4" onSubmit={handleSubmit}>
             <input
