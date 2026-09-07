@@ -64,8 +64,8 @@ const Login = () => {
           </button>
         </Link>
       </div>
-      <div className="flex justify-center items-center ">
-        <div className="bg-white shadow-lg rounded-xl p-8 md:w-96 ">
+      <div className="flex justify-center md:p-20 items-center ">
+        <div className="bg-white shadow-lg  rounded-xl p-8 md:w-96 ">
           <h2 className="text-2xl font-bold text-blue-950 mb-6">Login</h2>
           <form className="space-y-4" onSubmit={handleSubmit}>
             <input
